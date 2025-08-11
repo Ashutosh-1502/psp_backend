@@ -2,7 +2,7 @@ const path = require("path");
 const EXAMPLE_ENV_PATH = path.resolve(".", `.env.example`);
 const ENV_PATH = path.resolve(
   ".",
-  process.env.NODE_ENV === "test" ? ".env.spec" : ".env",
+  process.env.NODE_ENV === "production" ? ".env.spec" : ".env",
 );
 const dotenv = require("dotenv");
 const fs = require("fs");
