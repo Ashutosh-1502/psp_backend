@@ -1,17 +1,32 @@
 const path = require("path");
+const dotenv = require("dotenv");
+const fs = require("fs");
+
 const EXAMPLE_ENV_PATH = path.resolve(".", `.env.example`);
 const ENV_PATH = path.resolve(
   ".",
   process.env.NODE_ENV === "test" ? ".env.spec" : ".env",
 );
-const dotenv = require("dotenv");
-const fs = require("fs");
-const loadEnv = () => {
-  //parsing both env files
-  const exampleEnv = dotenv.parse(fs.readFileSync(EXAMPLE_ENV_PATH));
-  const env = dotenv.parse(fs.readFileSync(ENV_PATH));
 
-  //checking missing values
+const loadEnv = () => {
+  let exampleEnv = {};
+  let env = {};
+
+  // Always load example env if it exists (for checking keys)
+  if (fs.existsSync(EXAMPLE_ENV_PATH)) {
+    exampleEnv = dotenv.parse(fs.readFileSync(EXAMPLE_ENV_PATH));
+  }
+
+  if (process.env.NODE_ENV !== "production") {
+    // Local: Read from actual .env file
+    if (fs.existsSync(ENV_PATH)) {
+      env = dotenv.parse(fs.readFileSync(ENV_PATH));
+    }
+  } else {
+    // Production (Railway, etc.): Use process.env directly
+    env = process.env;
+  }
+
   const missingFromEnv = difference(Object.keys(exampleEnv), Object.keys(env));
   const missingFromEnvExample = difference(
     Object.keys(env),
@@ -21,9 +36,7 @@ const loadEnv = () => {
   showMessage(missingFromEnv, missingFromEnvExample);
 };
 
-const difference = (arrA, arrB) => {
-  return arrA.filter((a) => arrB.indexOf(a) < 0);
-};
+const difference = (arrA, arrB) => arrA.filter((a) => arrB.indexOf(a) < 0);
 
 const showMessage = (missingFromEnv, missingFromEnvExample) => {
   console.log("");
