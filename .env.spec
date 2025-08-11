@@ -1,21 +1,20 @@
 # Database Configuration
-DB_PATH=mongodb://localhost/test
+DB_PATH=xxxxx
 BACKUP_PATH=xxxxx
 LOCAL_DB_FILE=xxxxx
 
 # Server Configuration
-NODE_ENV=production
+NODE_ENV=dev
 PORT=xxxxx
 CRON_PORT=xxxxx
 HOST=xxxxx
 FRONTEND_HOST=xxxxx
 FRONTEND_INVITE_URL=xxxxx
 JWT_SECRET=xxxxx
-# If there are multiple origins then add them as a comma separated values i.e. `https://test1.com,https://test2.com`.
 ALLOWED_ORIGINS=http://localhost:3000
 
 # Request time-out (in milliseconds)
-REQUEST_TIMEOUT=xxxxx
+REQUEST_TIMEOUT=60000
 
 # Number of test data
 NUM_TEST_DATA=10
