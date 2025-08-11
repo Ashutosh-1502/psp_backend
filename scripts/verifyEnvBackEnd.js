@@ -6,6 +6,8 @@ const ENV_PATH = path.resolve(
 );
 const dotenv = require("dotenv");
 const fs = require("fs");
+
+console.log(process.env.NODE_ENV)
 const loadEnv = () => {
   //parsing both env files
   const exampleEnv = dotenv.parse(fs.readFileSync(EXAMPLE_ENV_PATH));

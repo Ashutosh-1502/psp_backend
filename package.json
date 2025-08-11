@@ -3,16 +3,16 @@
   "version": "0.1.0",
   "license": "MIT",
   "scripts": {
-    "dev": "node scripts/verifyEnvBackEnd && cross-env NODE_ENV=dev nodemon -r tsconfig-paths/register lib/server.ts",
-    "cron-dev": "node scripts/verifyEnvBackEnd && cross-env NODE_ENV=dev nodemon -r tsconfig-paths/register lib/cron/index.ts",
-    "build": "node scripts/verifyEnvBackEnd.js && tsc && tsc-alias",
-    "start": "node server/server.js",
-    "cron-start": "node server/cron/index.js",
-    "lint": "eslint --ignore-path .gitignore --ext .ts .",
-    "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
-    "precommit": "lint-staged",
-    "test": "jest"
-  },
+  "dev": "node scripts/verifyEnvBackEnd && cross-env NODE_ENV=dev nodemon -r tsconfig-paths/register lib/server.ts",
+  "cron-dev": "node scripts/verifyEnvBackEnd && cross-env NODE_ENV=dev nodemon -r tsconfig-paths/register lib/cron/index.ts",
+  "build": "if [ \"$NODE_ENV\" != \"production\" ]; then node scripts/verifyEnvBackEnd.js; fi && tsc && tsc-alias",
+  "start": "node server/server.js",
+  "cron-start": "node server/cron/index.js",
+  "lint": "eslint --ignore-path .gitignore --ext .ts .",
+  "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
+  "precommit": "lint-staged",
+  "test": "jest"
+},
   "engines": {
     "node": ">=18.0.0 <=22"
   },
