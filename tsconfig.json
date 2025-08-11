@@ -1,0 +1,23 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "target": "es5",
+    "rootDir": "./lib",
+    "outDir": "./server",
+    "incremental": true,
+    "skipLibCheck": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "importsNotUsedAsValues": "remove",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "experimentalDecorators": true,
+    "resolveJsonModule": true,
+    "typeRoots": ["node_modules/@types", "./@types"],
+    "paths": {
+      "@/*": ["./lib/*"]
+    }
+  },
+  "exclude": ["node_modules"],
+  "include": ["lib/**/*.ts", "lib/**/*.d.ts"]
+}
