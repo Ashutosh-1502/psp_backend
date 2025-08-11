@@ -14,6 +14,7 @@ import { CookieOptions } from "express";
 export const cookieOptions: CookieOptions = {
   httpOnly: true,
   secure: envConfig.NODE_ENV === ENV.PRODUCTION,
+  domain: envConfig.NODE_ENV === ENV.PRODUCTION ? "psp-app-web.vercel.app" : "localhost",
   sameSite: "strict",
-  path: "/", // Ensures cookie is available throughout the site
+  path: "/",
 };
