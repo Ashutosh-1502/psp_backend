@@ -23,7 +23,7 @@ const envConfig: EnvConfigType = {
   FRONTEND_HOST: process.env.FRONTEND_HOST ?? "localhost:3000",
   FRONTEND_INVITE_URL:
     process.env.FRONTEND_INVITE_URL ?? "http://localhost:3000/signup",
-  JWT_SECRET: process.env.JWT_SECRET ?? "i am a tea pot",
+  JWT_SECRET: process.env.JWT_SECRET ?? "protein_structure_prediction_united_institute_of_technology_final_year_project",
   ALLOWED_ORIGINS: process.env.ALLOWED_ORIGINS ?? "http://localhost:3000",
 
   // request timeout (in milliseconds)
