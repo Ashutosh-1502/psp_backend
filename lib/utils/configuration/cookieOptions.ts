@@ -1,5 +1,5 @@
-import envConfig from "@/utils/configuration/environment";
-import { ENV } from "@/utils/enums/enums";
+// import envConfig from "@/utils/configuration/environment";
+// import { ENV } from "@/utils/enums/enums";
 import { CookieOptions } from "express";
 
 /**
@@ -13,7 +13,7 @@ import { CookieOptions } from "express";
  */
 export const cookieOptions: CookieOptions = {
   httpOnly: true,
-  secure: envConfig.NODE_ENV === ENV.PRODUCTION,
+  secure: true,
   sameSite: "none",
   path: "/",
 };
