@@ -10,7 +10,7 @@ export class DashboardRouter {
   router: Router;
   constructor() {
     this.router = Router();
-    this.router.use(middleware.authMiddleware);
+    this.router.use(middleware.adminMiddleware);
     this.router.get("/dashboard-details", DashboardRoutes.getAllDashboardDetails);
     this.router.post("/new-announcement", DashboardRoutes.newAnnouncement);
     this.router.post("/manage-users/:id", DashboardRoutes.manageUser)
