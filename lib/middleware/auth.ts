@@ -43,23 +43,6 @@ export class Middleware {
       if (!tokenFromCookie && !authHeader) {
         return this.sendForbiddenAccessResponse(res);
       }
-      if (tokenFromCookie) {
-        const { roles } = req.user;
-        const allowedRoles = [
-          USER_TYPE.SUPER_ADMIN,
-          USER_TYPE.ADMIN,
-          USER_TYPE.USER,
-        ];
-
-        if (!allowedRoles.includes(roles)) {
-          return this.sendForbiddenAccessResponse(res);
-        }
-        
-        if (roles === USER_TYPE.SUPER_ADMIN) {
-          req.user.companyRef = req.query.companyRef || req.body.companyRef;
-        }
-      }
-
       next();
     } catch (err) {
       return this.sendForbiddenAccessResponse(res);
