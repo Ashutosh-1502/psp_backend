@@ -36,7 +36,7 @@ export class DashboardRoutes {
     next: NextFunction,
   ) => {
     try {
-      const {operation} = req.body;
+      const { operation } = req.body;
       const id: string = req.params.id;
       const data = await DashboardHelpers.manageUser(id, operation);
 
@@ -58,26 +58,30 @@ export class DashboardRoutes {
   public static newAnnouncement = async (
     req: AuthenticatedRequest,
     res: Response,
-    next: NextFunction
+    next: NextFunction,
   ) => {
     try {
       const notification: DashboardType = req.body;
 
       const data = await DashboardHelpers.newAnnouncement(notification);
-      if (!data){
+      if (!data) {
         return ErrorResponse(res, status.NOT_FOUND, {
           message: "Notification not found",
         });
       }
+
+      //emit announcement in real time
+      const io = req.app.get("io");
+      io.emit("new-announcement", data);
 
       return SuccessResponse(res, status.OK, {
         message: "Success",
         data,
       });
     } catch (error) {
-      next(error)
+      next(error);
     }
-  }
+  };
 
   public static managenotification = async (
     req: AuthenticatedRequest,
@@ -87,9 +91,13 @@ export class DashboardRoutes {
     try {
       const notification: DashboardType = req.body;
       const id: string = req.params.id;
-      const userId = req.params.notificationId
+      const userId = req.params.notificationId;
 
-      const data = await DashboardHelpers.manageNotification(id, notification, userId);
+      const data = await DashboardHelpers.manageNotification(
+        id,
+        notification,
+        userId,
+      );
 
       if (!data) {
         return ErrorResponse(res, status.NOT_FOUND, {

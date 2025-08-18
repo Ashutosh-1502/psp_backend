@@ -68,6 +68,10 @@ export class AuthRoutes {
 
       res.cookie(COOKIE_NAME.TOKEN, token, cookieOptions);
 
+      //emit event to all connected admin clients
+      const io = req.app.get("io");
+      io.emit("new-user", user);
+
       return SuccessResponse(res, status.OK, {
         message: "Success.",
         data: { user, token },

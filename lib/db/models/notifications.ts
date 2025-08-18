@@ -45,6 +45,7 @@ const NotificationSchema = new mongoose.Schema<INotificationDocument>(
     notificationSeenStatus: {
       type: [
         {
+          _id: false,
           userRef: {
             type: ObjectId,
             ref: "Notification",

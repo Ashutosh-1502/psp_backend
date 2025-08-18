@@ -2,8 +2,11 @@ import mongoose from "mongoose";
 
 export interface ISequence {
   _id: mongoose.Types.ObjectId;
-  sequence: string;
-  sequenceDetails: string;
+  proteinName: string;
+  pdbId: string;
+  sequenceId: string;
+  length: number;
+  sequence: string
 }
 
 export interface ISequenceDocument extends ISequence, Document {
@@ -13,11 +16,23 @@ export interface ISequenceDocument extends ISequence, Document {
 
 const SequenceSchema = new mongoose.Schema<ISequenceDocument>(
   {
-    sequence: {
+    proteinName: {
       type: String,
-      required: true,
+      required: true
     },
-    sequenceDetails: {
+    pdbId: {
+      type: String,
+      required: true
+    },
+    sequenceId: {
+      type: String,
+      required: true
+    },
+    length: {
+      type: Number,
+      required: true
+    },
+    sequence: {
       type: String,
       required: true,
     },
